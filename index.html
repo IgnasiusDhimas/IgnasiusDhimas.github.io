@@ -1,51 +1,1187 @@
 <!DOCTYPE html>
 <html lang="en">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ignasius Dhimas Panji Utomo | Software Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== VARIABEL & RESET ===== */
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #8b5cf6;
+      --accent-color: #06b6d4;
+      --github-color: #00ff88;
+      --linkedin-color: #0077b5;
+      --instagram-color: #E1306C;
+      --dark-bg: #0a0a0a;
+      --darker-bg: #000000;
+      --card-bg: rgba(30, 30, 30, 0.7);
+      --card-border: rgba(59, 130, 246, 0.2);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-hover: #ffffff;
+      --border-color: #2a2a2a;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      --glow-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--darker-bg) 0%, #111111 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* ===== HEADER & NAVBAR MINIMALIS MODERN ===== */
+    header {
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideDown 0.5s ease-out;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    @keyframes slideDown {
+      from { 
+        transform: translateY(-100%); 
+        opacity: 0; 
+      }
+      to { 
+        transform: translateY(0); 
+        opacity: 1; 
+      }
+    }
+    
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      position: relative;
+      padding: 5px 0;
+      transition: var(--transition);
+    }
+    
+    .logo a span {
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .logo a:hover {
+      transform: translateY(-2px);
+    }
+    
+    .logo a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transition: width 0.4s ease;
+    }
+    
+    .logo a:hover::after {
+      width: 100%;
+    }
+    
+    /* ===== MODERN MINIMALIST NAV ===== */
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+    
+    /* Underline hover effect yang minimalis */
+    nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover {
+      color: var(--text-primary);
+    }
+    
+    nav a:hover::before {
+      width: 100%;
+    }
+    
+    /* Active state yang minimalis */
+    nav a.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    nav a.active::before {
+      width: 100%;
+      background: var(--accent-color);
+      height: 2px;
+    }
+    
+    /* ===== HAMBURGER MENU (Untuk Mobile) ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      z-index: 1001;
+    }
+    
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: var(--transition);
+    }
+    
+    /* ===== MAIN BANNER ===== */
+    .main-banner {
+      background: linear-gradient(135deg, 
+        rgba(10, 10, 10, 0.95) 0%, 
+        rgba(20, 20, 20, 0.9) 50%, 
+        rgba(15, 15, 15, 0.85) 100%);
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    }
+    
+    .main-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .main-banner > div {
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .main-banner h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fadeInUp 1s ease-out;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .main-banner p {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+    
+    /* ===== SOCIAL LINKS ===== */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 50px 0 40px;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+    
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(30, 30, 30, 0.7);
+      color: var(--text-primary);
+      font-size: 30px;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(10px);
+    }
+    
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    
+    .social-link:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* ===== GITHUB HOVER EFFECT ===== */
+    .social-link.github:hover {
+      background: rgba(0, 0, 0, 0.8);
+      color: var(--github-color);
+      border-color: var(--github-color);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8),
+                  0 0 25px rgba(0, 255, 136, 0.4),
+                  var(--glow-shadow);
+    }
+    
+    .social-link.github:hover .fa-github {
+      text-shadow: 0 0 10px var(--github-color),
+                   0 0 20px var(--github-color);
+    }
+    
+    /* Glow ring untuk GitHub */
+    .social-link.github::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .social-link.github:hover::after {
+      opacity: 1;
+      border-color: rgba(0, 255, 136, 0.3);
+      animation: githubGlow 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes githubGlow {
+      0%, 100% { 
+        box-shadow: 0 0 5px rgba(0, 255, 136, 0.5),
+                    inset 0 0 5px rgba(0, 255, 136, 0.2);
+      }
+      50% { 
+        box-shadow: 0 0 10px rgba(0, 255, 136, 0.8),
+                    inset 0 0 10px rgba(0, 255, 136, 0.3);
+      }
+    }
+    
+    /* Tooltip khusus untuk GitHub */
+    .social-link.github .tooltip {
+      background-color: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+    
+    .social-link.github:hover .tooltip {
+      color: var(--github-color);
+    }
+    
+    /* ===== LINKEDIN HOVER EFFECT ===== */
+    .social-link.linkedin:hover {
+      background: var(--linkedin-color);
+      color: white;
+      border-color: var(--linkedin-color);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 119, 181, 0.5), 
+                  0 0 25px rgba(0, 119, 181, 0.3),
+                  var(--glow-shadow);
+    }
+    
+    /* ===== INSTAGRAM HOVER EFFECT ===== */
+    .social-link.instagram:hover {
+      background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+      color: white;
+      border-color: var(--instagram-color);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(225, 48, 108, 0.5), 
+                  0 0 25px rgba(225, 48, 108, 0.3),
+                  var(--glow-shadow);
+    }
+    
+    /* Tooltip */
+    .social-link .tooltip {
+      position: absolute;
+      bottom: -50px;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 13px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    
+    .social-link:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      bottom: -45px;
+    }
+    
+    /* ===== MODERN SECTIONS DENGAN TEXT CONTRAST PADA HOVER ===== */
+    section {
+      max-width: 1000px;
+      margin: 5rem auto;
+      padding: 0 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    #intro, #skills {
+      background: var(--card-bg);
+      padding: 3.5rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+    
+    /* Gradient border effect */
+    #intro::before, #skills::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+      border-radius: 21px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    #intro:hover::before, #skills:hover::before {
+      opacity: 0.3;
+    }
+    
+    /* Efek hover untuk card - background lebih terang dan teks lebih kontras */
+    #intro:hover, #skills:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7),
+                  var(--glow-shadow);
+      border-color: rgba(59, 130, 246, 0.4);
+      background: rgba(40, 40, 40, 0.8);
+    }
+    
+    /* PERBAIKAN: Teks tetap terbaca sebelum hover, menjadi putih saat hover */
+    #intro p,
+    #intro h2,
+    #skills h2,
+    #skills li {
+      color: var(--text-primary); /* Teks tetap terang sebelum hover */
+      transition: color 0.4s ease;
+    }
+    
+    /* Saat card di-hover, teks menjadi lebih terang/kontras */
+    #intro:hover p,
+    #intro:hover h2,
+    #skills:hover h2,
+    #skills:hover li {
+      color: var(--text-hover); /* Warna putih saat hover */
+    }
+    
+    /* PARAGRAF DAN LIST ITEM: Warna sedikit lebih redup sebelum hover, menjadi terang saat hover */
+    #intro p {
+      color: var(--text-secondary); /* Lebih redup sebelum hover */
+    }
+    
+    #skills li {
+      color: var(--text-secondary); /* Lebih redup sebelum hover */
+      padding: 1rem 0;
+      font-size: 1.2rem;
+      position: relative;
+      padding-left: 2.5rem;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      position: relative;
+      display: inline-block;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+    
+    #intro p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    
+    #skills ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    #skills li:last-child {
+      border-bottom: none;
+    }
+    
+    #skills li:hover {
+      transform: translateX(10px);
+      color: var(--text-hover);
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    #skills li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-weight: bold;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    
+    #skills li:hover::before {
+      color: var(--text-hover);
+    }
+    
+    /* ===== FLOATING ELEMENTS ===== */
+    .floating-element {
+      position: absolute;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+      z-index: 1;
+      filter: blur(1px);
+    }
+    
+    .floating-element:nth-child(1) {
+      width: 100px;
+      height: 100px;
+      top: 15%;
+      left: 8%;
+      animation-delay: 0s;
+    }
+    
+    .floating-element:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      bottom: 20%;
+      right: 10%;
+      animation-delay: 2s;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    }
+    
+    .floating-element:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      top: 50%;
+      right: 20%;
+      animation-delay: 4s;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+    }
+    
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+      }
+      50% { 
+        transform: translateY(-25px) rotate(5deg); 
+      }
+    }
+    
+    /* ===== CTA BUTTON ===== */
+    .cta-button {
+      display: inline-block;
+      margin-top: 3rem;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(59, 130, 246, 0.6), 
+                  0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    
+    .cta-button:hover::before {
+      opacity: 1;
+    }
+    
+    .cta-button:active {
+      transform: translateY(0);
+    }
+    
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+      color: var(--text-secondary);
+      text-align: center;
+      padding: 4rem 20px;
+      margin-top: 8rem;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(59, 130, 246, 0.1);
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    }
+    
+    footer p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    
+    footer p:first-child {
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+    
+    /* ===== SOCIAL LINKS DI FOOTER ===== */
+    .social-links-footer {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .social-link-footer {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      font-size: 22px;
+      text-decoration: none;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Efek khusus untuk GitHub di footer */
+    .social-link-footer.github-footer:hover {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: var(--github-color);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9),
+                  0 0 25px rgba(0, 255, 136, 0.5);
+    }
+    
+    .social-link-footer.github-footer:hover i {
+      color: var(--github-color);
+      text-shadow: 0 0 10px var(--github-color),
+                   0 0 20px var(--github-color);
+    }
+    
+    /* Efek untuk LinkedIn di footer */
+    .social-link-footer.linkedin-footer:hover {
+      background: var(--linkedin-color);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 119, 181, 0.6), 
+                  0 0 25px rgba(0, 119, 181, 0.3);
+      border-color: var(--linkedin-color);
+    }
+    
+    /* Efek untuk Instagram di footer */
+    .social-link-footer.instagram-footer:hover {
+      background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(225, 48, 108, 0.6), 
+                  0 0 25px rgba(225, 48, 108, 0.3);
+      border-color: var(--instagram-color);
+    }
+    
+    /* ===== SCROLL PROGRESS BAR ===== */
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1001;
+    }
+    
+    .progress-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      width: 0%;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        z-index: 1000;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        font-size: 1.2rem;
+        padding: 0.8rem 2rem;
+        width: 80%;
+        text-align: center;
+      }
+      
+      nav a::before {
+        bottom: -2px;
+      }
+      
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+      
+      .main-banner h1 {
+        font-size: 2.8rem;
+      }
+      
+      .main-banner p {
+        font-size: 1.3rem;
+      }
+      
+      .social-links {
+        gap: 20px;
+      }
+      
+      .social-link {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+      
+      section {
+        padding: 0 1.5rem;
+      }
+      
+      #intro, #skills {
+        padding: 2.5rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .social-link-footer {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .floating-element {
+        opacity: 0.5;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .main-banner h1 {
+        font-size: 2.2rem;
+      }
+      
+      .main-banner p {
+        font-size: 1.1rem;
+      }
+      
+      .social-links {
+        gap: 15px;
+      }
+      
+      .social-link {
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+      }
+      
+      .social-links-footer {
+        gap: 15px;
+      }
+      
+      .social-link-footer {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+      
+      .floating-element {
+        display: none;
+      }
+      
+      .cta-button {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+      }
+      
+      .logo a {
+        font-size: 1.5rem;
+      }
+      
+      nav {
+        width: 85%;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-  <div class="navbar">
-    <div class="logo"><a href="index.html">Ignasius Dhimas</a></div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <!-- Scroll Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
   </div>
-</header>
 
-<div class="main-banner">
-  <div>
-    <h1>Hi, I’m Ignasius Dhimas Panji Utomo</h1>
-    <p>Software Engineer | Building scalable systems & elegant code</p>
+  <!-- Floating Elements -->
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+
+  <header>
+    <div class="navbar">
+      <div class="logo"><a href="index.html">Ignasius Dhimas</a></div>
+      
+      <!-- Hamburger Menu Icon (Mobile) -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <nav id="navMenu">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="main-banner">
+    <div>
+      <h1>Hi, I'm Ignasius Dhimas Panji Utomo</h1>
+      <p>Software Engineer | Building scalable systems & elegant code</p>
+      
+      <!-- Social Media Links di Banner Atas -->
+      <div class="social-links">
+        <!-- GitHub dengan efek glow hijau -->
+        <a href="https://github.com/username-anda" 
+           target="_blank" 
+           class="social-link github"
+           aria-label="Visit my GitHub profile">
+          <i class="fab fa-github"></i>
+          <span class="tooltip">GitHub</span>
+        </a>
+        
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/username-anda" 
+           target="_blank" 
+           class="social-link linkedin"
+           aria-label="Visit my LinkedIn profile">
+          <i class="fab fa-linkedin-in"></i>
+          <span class="tooltip">LinkedIn</span>
+        </a>
+        
+        <!-- Instagram -->
+        <a href="https://instagram.com/username-anda" 
+           target="_blank" 
+           class="social-link instagram"
+           aria-label="Visit my Instagram profile">
+          <i class="fab fa-instagram"></i>
+          <span class="tooltip">Instagram</span>
+        </a>
+      </div>
+      
+      <!-- CTA Button -->
+      <a href="contact.html" class="cta-button">Get In Touch</a>
+    </div>
   </div>
-</div>
 
-<section id="intro">
-  <h2>What I do</h2>
-  <p>I design, build and maintain software applications that deliver real value. My focus is on end-to-end development: from architecture, API design, database modelling, front-end implementation to deployment and maintenance in production.</p>
-</section>
+  <section id="intro">
+    <h2>What I do</h2>
+    <p>I design, build and maintain software applications that deliver real value. My focus is on end-to-end development: from architecture, API design, database modelling, front-end implementation to deployment and maintenance in production.</p>
+    <p>With a passion for clean code and efficient systems, I strive to create solutions that are not only functional but also scalable and maintainable for the long term in the digital world.</p>
+  </section>
 
-<section id="skills">
-  <h2>Core Skills</h2>
-  <ul>
-    <li>Programming Languages: Java OOP, C, PHP, Javascript</li>
-    <li>Frameworks & Technologies: Laravel, MERN.js</li>
-    <li>Databases: MySQL, SQLite</li>
-    <li>Software Engineering Practices: Clean Code, SOLID, Design Patterns</li>
-  </ul>
-</section>
+  <section id="skills">
+    <h2>Core Skills</h2>
+    <ul>
+      <li>Programming Languages: Java OOP, C, PHP, Javascript, Python</li>
+      <li>Frameworks & Technologies: Laravel, MERN.js, React, Node.js, Express</li>
+      <li>Databases: MySQL, SQLite, MongoDB, PostgreSQL, Redis</li>
+      <li>Software Engineering Practices: Clean Code, SOLID, Design Patterns, TDD, Agile/Scrum</li>
+      <li>Tools & Platforms: Git, Docker, AWS, RESTful APIs, CI/CD, Linux</li>
+    </ul>
+  </section>
 
-<footer>
-  &copy; 2025 Ignasius Dhimas Panji Utomo. All rights reserved.
-</footer>
+  <footer>
+    <p>&copy; 2025 Ignasius Dhimas Panji Utomo. All rights reserved.</p>
+    <p>Let's build something amazing together!</p>
+    
+    <!-- Social links di footer -->
+    <div class="social-links-footer">
+      <!-- GitHub di footer -->
+      <a href="https://github.com/username-anda" 
+         target="_blank" 
+         class="social-link-footer github-footer"
+         aria-label="Visit my GitHub profile">
+        <i class="fab fa-github"></i>
+      </a>
+      
+      <!-- LinkedIn di footer -->
+      <a href="https://linkedin.com/in/username-anda" 
+         target="_blank" 
+         class="social-link-footer linkedin-footer"
+         aria-label="Visit my LinkedIn profile">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      
+      <!-- Instagram di footer -->
+      <a href="https://instagram.com/username-anda" 
+         target="_blank" 
+         class="social-link-footer instagram-footer"
+         aria-label="Visit my Instagram profile">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </footer>
 
+  <script>
+    // Scroll Progress Bar
+    window.addEventListener('scroll', function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+
+    // Scroll Animation untuk Sections
+    const sections = document.querySelectorAll('section');
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Animasi saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animasi untuk social links di banner atas
+      const bannerLinks = document.querySelectorAll('.social-link');
+      bannerLinks.forEach((link, index) => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(40px)';
+        
+        setTimeout(() => {
+          link.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+          link.style.opacity = '1';
+          link.style.transform = 'translateY(0)';
+        }, 400 + (index * 200));
+      });
+      
+      // Animasi untuk nav items (desktop only)
+      if (window.innerWidth > 768) {
+        const navItems = document.querySelectorAll('nav a');
+        navItems.forEach((item, index) => {
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(-10px)';
+          
+          setTimeout(() => {
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, 300 + (index * 100));
+        });
+      }
+      
+      // Animasi untuk social links di footer
+      const footerLinks = document.querySelectorAll('.social-link-footer');
+      footerLinks.forEach((link, index) => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+          link.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          link.style.opacity = '1';
+          link.style.transform = 'translateY(0)';
+        }, 1200 + (index * 150));
+      });
+      
+      // Efek klik untuk semua interactive elements
+      const allInteractive = document.querySelectorAll('.social-link, .social-link-footer, .cta-button, nav a');
+      allInteractive.forEach(element => {
+        element.addEventListener('click', function(e) {
+          // Efek visual klik
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 150);
+        });
+      });
+      
+      // Typewriter effect untuk h1
+      const h1 = document.querySelector('.main-banner h1');
+      const originalText = h1.textContent;
+      h1.textContent = '';
+      let i = 0;
+      let isTyping = false;
+      
+      function startTypeWriter() {
+        if (!isTyping) {
+          isTyping = true;
+          typeWriter();
+        }
+      }
+      
+      function typeWriter() {
+        if (i < originalText.length) {
+          h1.textContent += originalText.charAt(i);
+          i++;
+          setTimeout(typeWriter, 60);
+        } else {
+          isTyping = false;
+        }
+      }
+      
+      // Jalankan typewriter saat halaman dimuat
+      setTimeout(startTypeWriter, 800);
+      
+      // Tambahan: Efek untuk meningkatkan readability pada card hover
+      const cards = document.querySelectorAll('#intro, #skills');
+      cards.forEach(card => {
+        // Saat mouse masuk ke card
+        card.addEventListener('mouseenter', function() {
+          // Tambahkan efek smooth transition untuk semua elemen teks
+          const paragraphs = this.querySelectorAll('p');
+          const listItems = this.querySelectorAll('li');
+          const headings = this.querySelectorAll('h2');
+          
+          paragraphs.forEach(p => {
+            p.style.transition = 'color 0.4s ease';
+          });
+          
+          listItems.forEach(li => {
+            li.style.transition = 'color 0.4s ease, transform 0.3s ease';
+          });
+          
+          headings.forEach(h2 => {
+            h2.style.transition = 'color 0.4s ease';
+          });
+        });
+      });
+    });
+
+    // Parallax efek untuk floating elements
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const floatingElements = document.querySelectorAll('.floating-element');
+      
+      floatingElements.forEach((element, index) => {
+        const speed = 0.2 + (index * 0.08);
+        const yOffset = scrolled * speed;
+        element.style.transform = `translateY(${yOffset}px) rotate(${scrolled * 0.03}deg)`;
+      });
+    });
+
+    // Close menu when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+        }
+      }
+    });
+  </script>
 </body>
 </html>
