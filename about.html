@@ -947,6 +947,19 @@
         }
       }
     });
+
+    // ===== NAVIGASI DENGAN ARROW KEYS =====
+    // Arrow left -> index.html
+    // Arrow right -> projects.html
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowLeft') {
+        window.location.href = 'index.html';
+      }
+      
+      if (event.key === 'ArrowRight') {
+        window.location.href = 'projects.html';
+      }
+    });
   </script>
 </body>
 </html>
