@@ -1,63 +1,932 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects | Ignasius Dhimas Panji Utomo</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== VARIABEL & RESET ===== */
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #8b5cf6;
+      --accent-color: #06b6d4;
+      --github-color: #00ff88;
+      --linkedin-color: #0077b5;
+      --instagram-color: #E1306C;
+      --dark-bg: #0a0a0a;
+      --darker-bg: #000000;
+      --card-bg: rgba(30, 30, 30, 0.7);
+      --card-border: rgba(59, 130, 246, 0.2);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-hover: #ffffff;
+      --border-color: #2a2a2a;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      --glow-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--darker-bg) 0%, #111111 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* ===== HEADER & NAVBAR MINIMALIS MODERN ===== */
+    header {
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideDown 0.5s ease-out;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    @keyframes slideDown {
+      from { 
+        transform: translateY(-100%); 
+        opacity: 0; 
+      }
+      to { 
+        transform: translateY(0); 
+        opacity: 1; 
+      }
+    }
+    
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      position: relative;
+      padding: 5px 0;
+      transition: var(--transition);
+    }
+    
+    .logo a:hover {
+      transform: translateY(-2px);
+    }
+    
+    .logo a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transition: width 0.4s ease;
+    }
+    
+    .logo a:hover::after {
+      width: 100%;
+    }
+    
+    /* ===== MODERN MINIMALIST NAV ===== */
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+    
+    /* Underline hover effect yang minimalis */
+    nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover {
+      color: var(--text-primary);
+    }
+    
+    nav a:hover::before {
+      width: 100%;
+    }
+    
+    nav a.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    nav a.active::before {
+      width: 100%;
+      background: var(--accent-color);
+      height: 2px;
+    }
+    
+    /* ===== HAMBURGER MENU (Untuk Mobile) ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      z-index: 1001;
+    }
+    
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: var(--transition);
+    }
+    
+    /* ===== PROJECTS HERO SECTION ===== */
+    .projects-hero {
+      background: linear-gradient(135deg, 
+        rgba(10, 10, 10, 0.95) 0%, 
+        rgba(20, 20, 20, 0.9) 50%, 
+        rgba(15, 15, 15, 0.85) 100%);
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 40vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    }
+    
+    .projects-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .projects-hero > div {
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .projects-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fadeInUp 1s ease-out;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .projects-hero p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+    
+    /* ===== PROJECTS CONTENT ===== */
+    #projects {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    
+    #projects h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--text-primary);
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    #projects h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+    
+    /* ===== PROJECTS GRID ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    
+    /* ===== PROJECT CARD ===== */
+    .project-card {
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      text-decoration: none;
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* FIX: Remove initial opacity/transform that causes hiding */
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Gradient border effect */
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+      border-radius: 21px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .project-card:hover::before {
+      opacity: 0.3;
+    }
+    
+    /* Efek hover untuk project card */
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7),
+                  var(--glow-shadow);
+      border-color: rgba(59, 130, 246, 0.4);
+      background: rgba(40, 40, 40, 0.8);
+    }
+    
+    /* Teks menjadi lebih terang/kontras saat card di-hover */
+    .project-card:hover h3,
+    .project-card:hover p {
+      color: var(--text-hover);
+    }
+    
+    /* Transisi smooth untuk perubahan warna teks */
+    .project-card h3,
+    .project-card p {
+      transition: color 0.4s ease;
+    }
+    
+    .project-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .project-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    
+    .project-card:hover h3::after {
+      width: 100px;
+    }
+    
+    .project-card p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    
+    /* ===== FLOATING ELEMENTS ===== */
+    .floating-element {
+      position: absolute;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+      z-index: 1;
+      filter: blur(1px);
+    }
+    
+    .floating-element:nth-child(1) {
+      width: 100px;
+      height: 100px;
+      top: 15%;
+      left: 8%;
+      animation-delay: 0s;
+    }
+    
+    .floating-element:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      bottom: 20%;
+      right: 10%;
+      animation-delay: 2s;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    }
+    
+    .floating-element:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      top: 50%;
+      right: 20%;
+      animation-delay: 4s;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+    }
+    
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+      }
+      50% { 
+        transform: translateY(-25px) rotate(5deg); 
+      }
+    }
+    
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+      color: var(--text-secondary);
+      text-align: center;
+      padding: 4rem 20px;
+      margin-top: 8rem;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(59, 130, 246, 0.1);
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    }
+    
+    footer p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    
+    footer p:first-child {
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+    
+    /* ===== SOCIAL LINKS DI FOOTER ===== */
+    .social-links-footer {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .social-link-footer {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      font-size: 22px;
+      text-decoration: none;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Efek khusus untuk GitHub di footer */
+    .social-link-footer.github-footer:hover {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: var(--github-color);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9),
+                  0 0 25px rgba(0, 255, 136, 0.5);
+    }
+    
+    .social-link-footer.github-footer:hover i {
+      color: var(--github-color);
+      text-shadow: 0 0 10px var(--github-color),
+                   0 0 20px var(--github-color);
+    }
+    
+    /* Efek untuk LinkedIn di footer */
+    .social-link-footer.linkedin-footer:hover {
+      background: var(--linkedin-color);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 119, 181, 0.6), 
+                  0 0 25px rgba(0, 119, 181, 0.3);
+      border-color: var(--linkedin-color);
+    }
+    
+    /* Efek untuk Instagram di footer */
+    .social-link-footer.instagram-footer:hover {
+      background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(225, 48, 108, 0.6), 
+                  0 0 25px rgba(225, 48, 108, 0.3);
+      border-color: var(--instagram-color);
+    }
+    
+    /* ===== SCROLL PROGRESS BAR ===== */
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1001;
+    }
+    
+    .progress-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      width: 0%;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        z-index: 1000;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        font-size: 1.2rem;
+        padding: 0.8rem 2rem;
+        width: 80%;
+        text-align: center;
+      }
+      
+      nav a::before {
+        bottom: -2px;
+      }
+      
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+      
+      .projects-hero h1 {
+        font-size: 2.8rem;
+      }
+      
+      .projects-hero p {
+        font-size: 1.1rem;
+      }
+      
+      #projects {
+        padding: 0 1.5rem;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .project-card {
+        padding: 2rem;
+      }
+      
+      #projects h2 {
+        font-size: 2rem;
+      }
+      
+      .social-link-footer {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .floating-element {
+        opacity: 0.5;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .projects-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .projects-hero p {
+        font-size: 1rem;
+      }
+      
+      #projects {
+        padding: 0 1rem;
+      }
+      
+      .project-card {
+        padding: 1.5rem;
+      }
+      
+      .project-card h3 {
+        font-size: 1.5rem;
+      }
+      
+      .logo a {
+        font-size: 1.5rem;
+      }
+      
+      nav {
+        width: 85%;
+      }
+      
+      .social-links-footer {
+        gap: 15px;
+      }
+      
+      .social-link-footer {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+      
+      .floating-element {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-  <div class="navbar">
-    <div class="logo"><a href="index.html">Ignasius Dhimas</a></div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <!-- Scroll Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
   </div>
-</header>
 
-<section id="projects">
-  <h2>Projects That I've Done</h2>
-  <div class="projects-grid">
+  <!-- Floating Elements -->
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
 
-    <!-- CRUD Project -->
-    <a href="https://toko-ribetina-production-e800.up.railway.app" target="_blank" rel="noopener noreferrer" class="project-card">
-      <h3>UMKM CRUD System</h3>
-      <p>
-        A full-stack web application developed to manage transaction records with complete Create, Read, Update, Delete (CRUD) functionality.
-        Includes form validation, responsive layout, and structured MVC architecture. Built using Laravel + MySQL.
-      </p>
-    </a>
+  <header>
+    <div class="navbar">
+      <div class="logo"><a href="index.html">Ignasius Dhimas</a></div>
+      
+      <!-- Hamburger Menu Icon (Mobile) -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <nav id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- CV Builder -->
-    <a href="https://github.com/IgnasiusDhimas/CV_ABBED" target="_blank" rel="noopener noreferrer" class="project-card">
-      <h3>CV Builder (Backend Engineer)</h3>
-      <p>
-        Backend service for automated CV/Resume generator platform. Built scalable API architecture using Node.js and Express,
-        implemented template rendering engine and PDF generation. Ensured secure data validation and processing.
-      </p>
-    </a>
-
-    <!-- Website 17+8 -->
-    <a href="https://website-17-8-scu-76lh.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-card">
-      <h3>17+8 SCU Website</h3>
-      <p>
-        Official publication website for the 17+8 movement. Includes articles, timelines, media documentation and downloadable resources.
-        Responsible for interface development & content optimization to support transparency and awareness.
-      </p>
-    </a>
-
+  <div class="projects-hero">
+    <div>
+      <h1>My Projects</h1>
+      <p>A collection of my work showcasing full-stack development, backend architecture, and problem-solving skills</p>
+    </div>
   </div>
-</section>
 
-<footer>
-  &copy; 2025 Ignasius Dhimas Panji Utomo. All rights reserved.
-</footer>
+  <!-- KONTEN ASLI ANDA DIMULAI DI SINI - TIDAK ADA YANG DIUBAH -->
+  <section id="projects">
+    <h2>Projects That I've Done</h2>
+    <div class="projects-grid">
 
+      <!-- CRUD Project -->
+      <a href="https://toko-ribetina-production-e800.up.railway.app" target="_blank" rel="noopener noreferrer" class="project-card">
+        <h3>UMKM CRUD System</h3>
+        <p>
+          A full-stack web application developed to manage transaction records with complete Create, Read, Update, Delete (CRUD) functionality.
+          Includes form validation, responsive layout, and structured MVC architecture. Built using Laravel + MySQL.
+        </p>
+      </a>
+
+      <!-- CV Builder -->
+      <a href="https://frontend-production-3433.up.railway.app/app" target="_blank" rel="noopener noreferrer" class="project-card">
+        <h3>CV Builder AI (Backend Engineer)</h3>
+        <p>
+          Backend service for automated CV/Resume generator platform. Built scalable API architecture using Node.js and Express,
+          implemented template rendering engine and PDF generation. Ensured secure data validation and processing.
+        </p>
+      </a>
+
+      <!-- Website 17+8 -->
+      <a href="https://website-17-8-scu-76lh.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-card">
+        <h3>17+8 SCU Website</h3>
+        <p>
+          Official publication website for the 17+8 movement. Includes articles, timelines and media documentation.
+          Responsible for interface development & content optimization to support transparency and awareness.
+        </p>
+      </a>
+      <!-- Website peminjaman ruangan -->
+      <a href="http://peminjamanruangankampusscu.my.id/sistempeminjamanruangkampus/" target="_blank" rel="noopener noreferrer" class="project-card">
+        <h3>Sistem Peminjaman Ruangan Kampus</h3>
+        <p>
+         The Campus Room Booking System is a web-based application built with Laravel and MySQL, 
+         featuring three user roles—User, Staff, and Admin—to manage room reservations efficiently. 
+         Users can request room bookings, Staff validate and schedule them, and Admin oversees system data and reports. 
+         The system ensures smooth, real-time data flow across modules, creating a streamlined and conflict-free room management process.
+        </p>
+      </a>
+
+    </div>
+  </section>
+  <!-- KONTEN ASLI ANDA BERAKHIR DI SINI -->
+
+  <footer>
+    <p>&copy; 2025 Ignasius Dhimas Panji Utomo. All rights reserved.</p>
+    <p>Let's build something amazing together!</p>
+    
+    <!-- Social links di footer -->
+    <div class="social-links-footer">
+      <!-- GitHub di footer -->
+      <a href="https://github.com/IgnasiusDhimas" 
+         target="_blank" 
+         class="social-link-footer github-footer"
+         aria-label="Visit my GitHub profile">
+        <i class="fab fa-github"></i>
+      </a>
+      
+      <!-- LinkedIn di footer -->
+      <a href="https://www.linkedin.com/in/ignasius-dhimas/" 
+         target="_blank" 
+         class="social-link-footer linkedin-footer"
+         aria-label="Visit my LinkedIn profile">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      
+      <!-- Instagram di footer -->
+      <a href="https://www.instagram.com/igndhimas/" 
+         target="_blank" 
+         class="social-link-footer instagram-footer"
+         aria-label="Visit my Instagram profile">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // ===== SCROLL PROGRESS BAR =====
+    window.addEventListener('scroll', function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      const progressBar = document.getElementById('progressBar');
+      if (progressBar) {
+        progressBar.style.width = scrolled + '%';
+      }
+    });
+
+    // ===== SIMPLIFIED ANIMATION SYSTEM =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // FIX: Cards selalu terlihat dari awal
+      const projectCards = document.querySelectorAll('.project-card');
+      const projectsSection = document.getElementById('projects');
+      
+      // Pastikan section terlihat
+      if (projectsSection) {
+        projectsSection.style.opacity = '1';
+        projectsSection.style.transform = 'translateY(0)';
+        projectsSection.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      }
+      
+      // Pastikan semua cards terlihat dengan stagger effect
+      projectCards.forEach((card, index) => {
+        // Reset style untuk memastikan terlihat
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
+        // Tambahkan class visible
+        card.classList.add('visible');
+        
+        // Stagger effect untuk animasi masuk
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 100 + (index * 150));
+      });
+
+      // ===== HAMBURGER MENU =====
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+          hamburger.classList.toggle('active');
+          navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+          });
+        });
+      }
+
+      // ===== ANIMASI FOOTER LINKS =====
+      const footerLinks = document.querySelectorAll('.social-link-footer');
+      footerLinks.forEach((link, index) => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+          link.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          link.style.opacity = '1';
+          link.style.transform = 'translateY(0)';
+        }, 800 + (index * 150));
+      });
+
+      // ===== INTERAKSI PROJECT CARDS =====
+      projectCards.forEach(card => {
+        // Efek hover
+        card.addEventListener('mouseenter', function() {
+          this.style.cursor = 'pointer';
+        });
+        
+        // Efek klik
+        card.addEventListener('click', function(e) {
+          // Efek visual klik ringan
+          this.style.transform = 'scale(0.98) translateY(-5px)';
+          setTimeout(() => {
+            this.style.transform = 'translateY(-5px)';
+          }, 150);
+        });
+      });
+
+      // ===== INTERAKSI LAINNYA =====
+      const allInteractive = document.querySelectorAll('.social-link-footer, nav a');
+      allInteractive.forEach(element => {
+        element.addEventListener('click', function(e) {
+          // Efek visual klik ringan
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 150);
+        });
+      });
+    });
+
+    // ===== PARALLAX EFFECT =====
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const floatingElements = document.querySelectorAll('.floating-element');
+      
+      floatingElements.forEach((element, index) => {
+        const speed = 0.2 + (index * 0.08);
+        const yOffset = scrolled * speed;
+        element.style.transform = `translateY(${yOffset}px) rotate(${scrolled * 0.03}deg)`;
+      });
+    });
+
+    // ===== CLOSE MENU WHEN CLICKING OUTSIDE (MOBILE) =====
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (hamburger && navMenu) {
+          if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+          }
+        }
+      }
+    });
+
+    // ===== FALLBACK: PASTIKAN SEMUA TERLIHAT SETELAH LOAD =====
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.project-card');
+        cards.forEach(card => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+          card.classList.add('visible');
+        });
+        
+        const section = document.getElementById('projects');
+        if (section) {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+        }
+      }, 100);
+    });
+  </script>
 </body>
 </html>

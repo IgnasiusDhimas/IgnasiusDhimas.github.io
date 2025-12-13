@@ -5,144 +5,1368 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact | Ignasius Dhimas Panji Utomo</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    #contact {
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 0 20px;
-      color: #111;
-      text-align: left;   /* seluruh section rata kiri */
+    /* ===== VARIABEL & RESET ===== */
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #8b5cf6;
+      --accent-color: #06b6d4;
+      --github-color: #00ff88;
+      --linkedin-color: #0077b5;
+      --instagram-color: #E1306C;
+      --dark-bg: #0a0a0a;
+      --darker-bg: #000000;
+      --card-bg: rgba(30, 30, 30, 0.7);
+      --card-border: rgba(59, 130, 246, 0.2);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-hover: #ffffff;
+      --border-color: #2a2a2a;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      --glow-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    #contact h2 {
-      font-size: 2.3rem;
-      margin-bottom: 15px;
-      color: #111;
-      font-weight: 600;
-      text-align: left;   /* H2 rata kiri */
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    #contact p {
-      color: #555;
-      margin-bottom: 45px;
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--darker-bg) 0%, #111111 100%);
+      color: var(--text-primary);
       line-height: 1.6;
-      font-size: 1rem;
-      text-align: left;   /* paragraf kiri */
+      overflow-x: hidden;
+      min-height: 100vh;
     }
-
+    
+    /* ===== HEADER & NAVBAR MINIMALIS MODERN ===== */
+    header {
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideDown 0.5s ease-out;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    @keyframes slideDown {
+      from { 
+        transform: translateY(-100%); 
+        opacity: 0; 
+      }
+      to { 
+        transform: translateY(0); 
+        opacity: 1; 
+      }
+    }
+    
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      position: relative;
+      padding: 5px 0;
+      transition: var(--transition);
+    }
+    
+    .logo a:hover {
+      transform: translateY(-2px);
+    }
+    
+    .logo a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transition: width 0.4s ease;
+    }
+    
+    .logo a:hover::after {
+      width: 100%;
+    }
+    
+    /* ===== MODERN MINIMALIST NAV ===== */
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+    
+    /* Underline hover effect yang minimalis */
+    nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover {
+      color: var(--text-primary);
+    }
+    
+    nav a:hover::before {
+      width: 100%;
+    }
+    
+    nav a.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    nav a.active::before {
+      width: 100%;
+      background: var(--accent-color);
+      height: 2px;
+    }
+    
+    /* ===== HAMBURGER MENU (Untuk Mobile) ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      z-index: 1001;
+    }
+    
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: var(--transition);
+    }
+    
+    /* ===== CONTACT HERO SECTION ===== */
+    .contact-hero {
+      background: linear-gradient(135deg, 
+        rgba(10, 10, 10, 0.95) 0%, 
+        rgba(20, 20, 20, 0.9) 50%, 
+        rgba(15, 15, 15, 0.85) 100%);
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 40vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    }
+    
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .contact-hero > div {
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .contact-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fadeInUp 1s ease-out;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .contact-hero p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+    
+    /* ===== CONTACT CONTENT ===== */
+    #contact {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+      text-align: left;
+    }
+    
+    #contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      text-align: left;
+      position: relative;
+      display: inline-block;
+    }
+    
+    #contact h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+    
+    #contact p {
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      line-height: 1.6;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+    
+    /* ===== CONTACT FORM ===== */
     .contact-form {
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 1.5rem;
     }
-
+    
     .form-card {
-      padding: 18px 20px;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      padding: 1.8rem;
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      opacity: 1;
+      transform: translateY(0);
     }
-
+    
+    /* FIX: Remove initial hiding */
+    .form-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Gradient border effect */
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+      border-radius: 16px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .form-card:hover::before {
+      opacity: 0.3;
+    }
+    
+    .form-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6),
+                  var(--glow-shadow);
+      border-color: rgba(59, 130, 246, 0.4);
+      background: rgba(40, 40, 40, 0.8);
+    }
+    
     .form-card label {
       font-weight: 500;
-      margin-bottom: 6px;
+      margin-bottom: 0.8rem;
       display: block;
-      color: #222;
+      color: var(--text-primary);
+      font-size: 1rem;
     }
-
+    
     .form-card input,
     .form-card textarea {
       width: 100%;
-      padding: 12px;
+      padding: 1rem;
       border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-      background: #f3f3f3;
-      color: #222;
-      transition: .3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 1rem;
+      background: rgba(20, 20, 20, 0.6);
+      color: var(--text-primary);
+      transition: var(--transition);
       font-family: "Poppins", sans-serif;
     }
-
+    
     .form-card input:focus,
     .form-card textarea:focus {
-      border-color: #4CAF50;
-      box-shadow: 0 0 6px rgba(76,175,80,0.45);
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
       outline: none;
+      background: rgba(30, 30, 30, 0.8);
     }
-
+    
+    .form-card input::placeholder,
+    .form-card textarea::placeholder {
+      color: rgba(148, 163, 184, 0.6);
+    }
+    
     .contact-form button {
-      padding: 14px 28px;
-      font-size: 16px;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
       font-weight: 600;
-      border-radius: 10px;
+      border-radius: 50px;
       border: none;
-      background: #4CAF50;
-      color: #fff;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: var(--text-primary);
       cursor: pointer;
-      transition: .25s ease;
-      align-self: flex-start;     /* tombol kiri */
-      margin-top: 8px;
+      transition: var(--transition);
+      align-self: flex-start;
+      margin-top: 1rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
     }
-
+    
+    .contact-form button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+    
     .contact-form button:hover {
-      background: #45a049;
-      transform: translateY(-3px);
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.5), 
+                  0 0 20px rgba(59, 130, 246, 0.3);
     }
-
-    @media(max-width: 768px){
-      #contact { padding: 0 10px; }
-      .contact-form button { width: 100%; }
+    
+    .contact-form button:hover::before {
+      opacity: 1;
+    }
+    
+    /* ===== REDESIGNED CONTACT INFO ===== */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 5rem;
+    }
+    
+    .contact-info-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .contact-item {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: left;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    
+    /* FIX: Remove initial hiding */
+    .contact-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    
+    .contact-icon-wrapper {
+      width: 60px;
+      height: 60px;
+      min-width: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15));
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contact-icon {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      z-index: 1;
+      transition: var(--transition);
+    }
+    
+    .contact-icon-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      opacity: 0;
+      transition: var(--transition);
+    }
+    
+    .contact-item:hover .contact-icon-wrapper::before {
+      opacity: 0.2;
+    }
+    
+    .contact-item:hover .contact-icon {
+      transform: scale(1.1);
+      color: var(--accent-color);
+    }
+    
+    .contact-content {
+      flex: 1;
+    }
+    
+    .contact-item h3 {
+      color: var(--text-primary);
+      margin-bottom: 0.8rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+    
+    .contact-item p {
+      color: var(--text-secondary);
+      margin-bottom: 0;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+    }
+    
+    .contact-detail a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      display: inline-block;
+      width: fit-content;
+    }
+    
+    .contact-detail a:hover {
+      color: var(--primary-color);
+      transform: translateX(5px);
+    }
+    
+    .contact-detail a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    
+    .contact-detail a:hover::after {
+      width: 100%;
+    }
+    
+    .response-time-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #00ff88;
+      position: relative;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(0, 255, 136, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
+      }
+    }
+    
+    .location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-top: 10px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    
+    .location-badge i {
+      color: var(--primary-color);
+      font-size: 1rem;
+    }
+    
+    .contact-item:hover .location-badge {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+    
+    /* ===== MAP VISUALIZATION ===== */
+    .map-visualization {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    
+    .map-visualization::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+      z-index: 1;
+    }
+    
+    .map-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .map-pin {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      position: relative;
+      margin: 0 auto 2rem;
+      animation: bounce 2s infinite;
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+    }
+    
+    .map-pin::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      transform: rotate(45deg);
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) rotate(-45deg);
+      }
+      40% {
+        transform: translateY(-20px) rotate(-45deg);
+      }
+      60% {
+        transform: translateY(-10px) rotate(-45deg);
+      }
+    }
+    
+    .map-text h3 {
+      color: var(--text-primary);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .map-text p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .availability-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(59, 130, 246, 0.1));
+      padding: 10px 20px;
+      border-radius: 20px;
+      margin-top: 20px;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+    
+    .availability-badge i {
+      color: var(--github-color);
+    }
+    
+    /* ===== FLOATING ELEMENTS ===== */
+    .floating-element {
+      position: absolute;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+      z-index: 1;
+      filter: blur(1px);
+    }
+    
+    .floating-element:nth-child(1) {
+      width: 100px;
+      height: 100px;
+      top: 15%;
+      left: 8%;
+      animation-delay: 0s;
+    }
+    
+    .floating-element:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      bottom: 20%;
+      right: 10%;
+      animation-delay: 2s;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    }
+    
+    .floating-element:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      top: 50%;
+      right: 20%;
+      animation-delay: 4s;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+    }
+    
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+      }
+      50% { 
+        transform: translateY(-25px) rotate(5deg); 
+      }
+    }
+    
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+      color: var(--text-secondary);
+      text-align: center;
+      padding: 4rem 20px;
+      margin-top: 8rem;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(59, 130, 246, 0.1);
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    }
+    
+    footer p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    
+    footer p:first-child {
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+    
+    /* ===== SOCIAL LINKS DI FOOTER ===== */
+    .social-links-footer {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .social-link-footer {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      font-size: 22px;
+      text-decoration: none;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Efek khusus untuk GitHub di footer */
+    .social-link-footer.github-footer:hover {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: var(--github-color);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9),
+                  0 0 25px rgba(0, 255, 136, 0.5);
+    }
+    
+    .social-link-footer.github-footer:hover i {
+      color: var(--github-color);
+      text-shadow: 0 0 10px var(--github-color),
+                   0 0 20px var(--github-color);
+    }
+    
+    /* Efek untuk LinkedIn di footer */
+    .social-link-footer.linkedin-footer:hover {
+      background: var(--linkedin-color);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 119, 181, 0.6), 
+                  0 0 25px rgba(0, 119, 181, 0.3);
+      border-color: var(--linkedin-color);
+    }
+    
+    /* Efek untuk Instagram di footer */
+    .social-link-footer.instagram-footer:hover {
+      background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(225, 48, 108, 0.6), 
+                  0 0 25px rgba(225, 48, 108, 0.3);
+      border-color: var(--instagram-color);
+    }
+    
+    /* ===== SCROLL PROGRESS BAR ===== */
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1001;
+    }
+    
+    .progress-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      width: 0%;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .map-visualization {
+        min-height: 300px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        z-index: 1000;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        font-size: 1.2rem;
+        padding: 0.8rem 2rem;
+        width: 80%;
+        text-align: center;
+      }
+      
+      nav a::before {
+        bottom: -2px;
+      }
+      
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+      
+      .contact-hero h1 {
+        font-size: 2.8rem;
+      }
+      
+      .contact-hero p {
+        font-size: 1.1rem;
+      }
+      
+      #contact {
+        padding: 0 1.5rem;
+      }
+      
+      #contact h2 {
+        font-size: 2rem;
+      }
+      
+      .contact-info {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-form button {
+        width: 100%;
+        align-self: stretch;
+        text-align: center;
+      }
+      
+      .contact-item {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      
+      .contact-icon-wrapper {
+        margin: 0 auto;
+      }
+      
+      .contact-content {
+        text-align: center;
+      }
+      
+      .contact-detail a {
+        margin: 0 auto;
+      }
+      
+      .social-link-footer {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .floating-element {
+        opacity: 0.5;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .contact-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .contact-hero p {
+        font-size: 1rem;
+      }
+      
+      #contact {
+        padding: 0 1rem;
+      }
+      
+      .form-card {
+        padding: 1.5rem;
+      }
+      
+      .logo a {
+        font-size: 1.5rem;
+      }
+      
+      nav {
+        width: 85%;
+      }
+      
+      .social-links-footer {
+        gap: 15px;
+      }
+      
+      .social-link-footer {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+      
+      .contact-item {
+        padding: 1.5rem;
+      }
+      
+      .floating-element {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-
-<header>
-  <div class="navbar">
-    <div class="logo"><a href="index.html">Ignasius Dhimas</a></div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <!-- Scroll Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
   </div>
-</header>
 
-<section id="contact">
-  <h2>Get in Touch</h2>
-  <p>
-    If you’d like to discuss a project, job opportunity, or just connect,
-    feel free to drop me a message below. I’ll respond as soon as possible.
-  </p>
+  <!-- Floating Elements -->
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
 
-  <!-- Formspree Form -->
-  <form class="contact-form" action="https://formspree.io/f/xnnybwyj" method="POST">
-
-    <div class="form-card">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+  <header>
+    <div class="navbar">
+      <div class="logo"><a href="index.html">Ignasius Dhimas</a></div>
+      
+      <!-- Hamburger Menu Icon (Mobile) -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <nav id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="form-card">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+  <div class="contact-hero">
+    <div>
+      <h1>Get in Touch</h1>
+      <p>Let's discuss your project, collaborate, or just connect</p>
     </div>
+  </div>
 
-    <div class="form-card">
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="6" placeholder="Write your message..." required></textarea>
+  <section id="contact">
+    <h2>Get in Touch</h2>
+    <p>
+      If you'd like to discuss a project, job opportunity, or just connect,
+      feel free to drop me a message below. I'll respond as soon as possible.
+    </p>
+
+    <!-- Formspree Form -->
+    <form class="contact-form" action="https://formspree.io/f/xnnybwyj" method="POST">
+
+      <div class="form-card">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      </div>
+
+      <div class="form-card">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+      </div>
+
+      <div class="form-card">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" placeholder="Write your message..." required></textarea>
+      </div>
+
+      <button type="submit">Send Message</button>
+    </form>
+    
+    <!-- Redesigned Contact Info -->
+    <div class="contact-container">
+      <div class="contact-info-section">
+        <div class="contact-item">
+          <div class="contact-icon-wrapper">
+            <i class="fas fa-envelope contact-icon"></i>
+          </div>
+          <div class="contact-content">
+            <h3>Email</h3>
+            <div class="contact-detail">
+              <a href="mailto:ignasiusdhimas@example.com">ignasiusdhimas@example.com</a>
+            </div>
+            <p>Prefer direct email? Click above to send me a message</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon-wrapper">
+            <i class="fas fa-map-marker-alt contact-icon"></i>
+          </div>
+          <div class="contact-content">
+            <h3>Location</h3>
+            <p>Based in Semarang, Indonesia</p>
+            <div class="location-badge">
+              <i class="fas fa-clock"></i>
+              <span>GMT+7 • Open to remote work</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon-wrapper">
+            <i class="fas fa-clock contact-icon"></i>
+          </div>
+          <div class="contact-content">
+            <h3>Response Time</h3>
+            <p>Typically respond within 24 hours</p>
+            <div class="response-time-indicator">
+              <div class="status-dot"></div>
+              <span>Currently available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="map-visualization">
+        <div class="map-pin"></div>
+        <div class="map-content">
+          <h3>📍 Semarang, Indonesia</h3>
+          <p>Central Java's vibrant coastal city</p>
+          <div class="availability-badge">
+            <i class="fas fa-check-circle"></i>
+            <span>Available for remote opportunities worldwide</span>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <button type="submit">Send Message</button>
-  </form>
-</section>
+  <footer>
+    <p>&copy; 2025 Ignasius Dhimas Panji Utomo. All rights reserved.</p>
+    <p>Let's build something amazing together!</p>
+    
+    <!-- Social links di footer -->
+    <div class="social-links-footer">
+      <!-- GitHub di footer -->
+      <a href="https://github.com/IgnasiusDhimas" 
+         target="_blank" 
+         class="social-link-footer github-footer"
+         aria-label="Visit my GitHub profile">
+        <i class="fab fa-github"></i>
+      </a>
+      
+      <!-- LinkedIn di footer -->
+      <a href="https://www.linkedin.com/in/ignasius-dhimas/" 
+         target="_blank" 
+         class="social-link-footer linkedin-footer"
+         aria-label="Visit my LinkedIn profile">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      
+      <!-- Instagram di footer -->
+      <a href="https://www.instagram.com/igndhimas/" 
+         target="_blank" 
+         class="social-link-footer instagram-footer"
+         aria-label="Visit my Instagram profile">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </footer>
 
-<footer>
-  &copy; 2025 Ignasius Dhimas Panji Utomo. All rights reserved.
-</footer>
+  <script>
+    // ===== SCROLL PROGRESS BAR =====
+    window.addEventListener('scroll', function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      const progressBar = document.getElementById('progressBar');
+      if (progressBar) {
+        progressBar.style.width = scrolled + '%';
+      }
+    });
 
+    // ===== SIMPLIFIED ANIMATION SYSTEM =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // FIX: Form cards selalu terlihat dari awal
+      const formCards = document.querySelectorAll('.form-card');
+      const contactItems = document.querySelectorAll('.contact-item');
+      const contactSection = document.getElementById('contact');
+      
+      // Pastikan section contact terlihat
+      if (contactSection) {
+        contactSection.style.opacity = '1';
+        contactSection.style.transform = 'translateY(0)';
+        contactSection.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      }
+      
+      // Pastikan semua form cards terlihat dengan stagger effect
+      formCards.forEach((card, index) => {
+        // Reset style untuk memastikan terlihat
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
+        // Tambahkan class visible
+        card.classList.add('visible');
+        
+        // Stagger effect untuk animasi masuk
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 100 + (index * 150));
+      });
+
+      // Pastikan semua contact items terlihat dengan stagger effect
+      contactItems.forEach((item, index) => {
+        // Reset style untuk memastikan terlihat
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0)';
+        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
+        // Tambahkan class visible
+        item.classList.add('visible');
+        
+        // Stagger effect untuk animasi masuk
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        }, 400 + (index * 200));
+      });
+
+      // ===== HAMBURGER MENU =====
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+          hamburger.classList.toggle('active');
+          navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+          });
+        });
+      }
+
+      // ===== ANIMASI FOOTER LINKS =====
+      const footerLinks = document.querySelectorAll('.social-link-footer');
+      footerLinks.forEach((link, index) => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+          link.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          link.style.opacity = '1';
+          link.style.transform = 'translateY(0)';
+        }, 800 + (index * 150));
+      });
+
+      // ===== FORM INTERACTIONS =====
+      const formInputs = document.querySelectorAll('.form-card input, .form-card textarea');
+      formInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          this.parentElement.style.transform = 'translateY(-5px)';
+          this.parentElement.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.6), var(--glow-shadow)';
+        });
+        
+        input.addEventListener('blur', function() {
+          this.parentElement.style.transform = '';
+          this.parentElement.style.boxShadow = '';
+        });
+      });
+
+      // ===== SUBMIT BUTTON EFFECT =====
+      const submitButton = document.querySelector('.contact-form button');
+      if (submitButton) {
+        submitButton.addEventListener('click', function(e) {
+          // Efek visual klik ringan
+          this.style.transform = 'scale(0.95) translateY(-5px)';
+          setTimeout(() => {
+            this.style.transform = 'translateY(-5px)';
+          }, 150);
+        });
+      }
+
+      // ===== INTERAKSI LAINNYA =====
+      const allInteractive = document.querySelectorAll('.social-link-footer, nav a, .contact-detail a');
+      allInteractive.forEach(element => {
+        element.addEventListener('click', function(e) {
+          // Efek visual klik ringan
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 150);
+        });
+      });
+
+      // ===== MAP PIN ANIMATION =====
+      const mapPin = document.querySelector('.map-pin');
+      if (mapPin) {
+        // Randomize animation delay
+        const randomDelay = Math.random() * 2;
+        mapPin.style.animationDelay = `${randomDelay}s`;
+      }
+    });
+
+    // ===== PARALLAX EFFECT =====
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const floatingElements = document.querySelectorAll('.floating-element');
+      
+      floatingElements.forEach((element, index) => {
+        const speed = 0.2 + (index * 0.08);
+        const yOffset = scrolled * speed;
+        element.style.transform = `translateY(${yOffset}px) rotate(${scrolled * 0.03}deg)`;
+      });
+    });
+
+    // ===== CLOSE MENU WHEN CLICKING OUTSIDE (MOBILE) =====
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (hamburger && navMenu) {
+          if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+          }
+        }
+      }
+    });
+
+    // ===== FALLBACK: PASTIKAN SEMUA TERLIHAT SETELAH LOAD =====
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        // Form cards
+        const formCards = document.querySelectorAll('.form-card');
+        formCards.forEach(card => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+          card.classList.add('visible');
+        });
+        
+        // Contact items
+        const contactItems = document.querySelectorAll('.contact-item');
+        contactItems.forEach(item => {
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+          item.classList.add('visible');
+        });
+        
+        // Contact section
+        const section = document.getElementById('contact');
+        if (section) {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+        }
+      }, 100);
+    });
+  </script>
 </body>
 </html>
